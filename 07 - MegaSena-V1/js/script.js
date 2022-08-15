@@ -29,11 +29,18 @@ function renderBoard() {
   var divBoard = document.querySelector('#megasena-board');
   divBoard.innerHTML = '';
   var ulNumbers = document.createElement('ul');
+  ulNumbers.classList.add('numbers');
   for (var i = 0; i < state.board.length; i++) {
     var currentNumber = state.board[i];
     var liNumber = document.createElement('li');
+    liNumber.classList.add('number');
     liNumber.textContent = currentNumber;
     liNumber.addEventListener('click', handleNumberClick);
+
+    if (isNumberInGame(currentNumber)) {
+      liNumber.classList.add('selected-number');
+    }
+
     ulNumbers.appendChild(liNumber);
   }
   divBoard.appendChild(ulNumbers);
@@ -47,6 +54,7 @@ function handleNumberClick(event) {
     addNumberToGame(value);
   }
   console.log(state.currentGame);
+  render();
 }
 
 function renderButtons() {
